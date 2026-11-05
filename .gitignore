@@ -1,0 +1,43 @@
+# Private study data and generated patient-level artifacts
+/data/
+/results/
+/outputs/
+/artifacts/
+
+# Tabular and serialized data that must not be added outside ignored directories
+*.csv
+*.tsv
+*.parquet
+*.feather
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.xlsx
+*.xls
+
+# Model checkpoints and serialized weights
+*.ckpt
+*.pt
+*.pth
+*.onnx
+*.safetensors
+
+# Python environments and caches
+.venv/
+venv/
+env/
+.env/
+.conda/
+__pycache__/
+*.py[cod]
+*.so
+
+# Local tooling and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0",
+  "script_version": "1.0.0",
+  "created_utc": "2026-07-19T10:19:39.503809+00:00",
+  "input_dataset": {
+    "path": "data\\processed\\cmr_revision_analysis.csv",
+    "sha256": "e94b8aebe4c4939b0b3def943879539f4f242ba7ef39fd7ac929407578f7db9c",
+    "cohort_n": 2159
+  },
+  "registry_vocabulary": {
+    "path": "config/registry_vocabulary.json",
+    "vocabulary_specification_sha256": "1250d92ca3f5d5da2049f3965837a7cfa0b70daaa9ffae2e09d71f8235eac023",
+    "total_features": 62
+  },
+  "outer_cross_validation": {
+    "method": "StratifiedKFold",
+    "n_splits": 5,
+    "shuffle": true,
+    "random_state": 42,
+    "stratify_column": "mace_30d_event",
+    "fold_labels": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "assignment_path": "data\\processed\\outer_cv_folds.csv",
+    "assignment_file_sha256": "95ff849d15a36deab45b869e12447a7f1bb67c2abf26f20cbb8f3bf99e5fc6d8",
+    "assignment_specification_sha256": "69c4a862c97d96a7c29e21dcc9c3a1bb7b74f87f1d0baee6c26b4f87fda219eb",
+    "one_out_of_fold_prediction_per_patient": true
+  },
+  "inner_cross_validation": {
+    "method": "StratifiedKFold for binary models; model-appropriate event-stratified K-fold for survival models",
+    "n_splits": 5,
+    "shuffle": true,
+    "base_random_state": 2026,
+    "construction": "Created separately within each outer-training set. The inner seed for outer fold k is base_random_state + k.",
+    "purpose": "Hyperparameter optimisation only"
+  },
+  "comparison_rules": {
+    "shared_outer_folds": true,
+    "paired_out_of_fold_predictions": true,
+    "preprocessing_fit_on_outer_training_data_only": true,
+    "hyperparameter_tuning_within_outer_training_data_only": true,
+    "processed_dataset_not_used_as_final_test_set": true,
+    "external_validation": false
+  },
+  "endpoint_event_counts": {
+    "mace_0d_event": 212,
+    "mace_30d_event": 196,
+    "mace_60d_event": 179,
+    "mace_90d_event": 163,
+    "mace_late_revasc_event": 150,
+    "hard_mace_event": 83
+  }
+}
